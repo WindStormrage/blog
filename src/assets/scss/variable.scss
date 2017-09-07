@@ -1,0 +1,99 @@
+$nav-lift-bg: #F2F2F2;//左边导航的背景颜色
+$head: #3B99EA;//头像的背景颜色
+$nav-hover: #A8A8A8;//左边导航hover的颜色
+$nav-action: #74B5EC;//左侧导航选中背景颜色
+$nav-right-bg: #74B5EC;//右边导航的背景颜色
+$content-bg: #EDEEF0;//右边内容的背景颜色
+$content-tab: #2A80F2;//手机屏幕上面导航条背景颜色
+
+$home-card: #C7DBEE;//首页的卡片的背景颜色
+
+$axis-card: #74B3EB;//随笔的卡片背景颜色
+$axis-tab: #0066ff;//随笔的小圆点背景颜色
+$axis-line: #74B3EB;//随笔的轴的颜色
+
+$comment-hr: #737373;//评论hr的颜色
+$comment-all: #3B99EA;//评论的色调
+
+//黄金分割率
+$gold: 0.618;
+
+//左边导航的宽度
+$nav-left: (1-$gold)*(1-$gold)*100%;
+
+//右边导航的宽度
+$nav-right: (1-$gold)*$gold*100%;
+$nav-right-s: $gold*100%;
+
+//内容的宽度
+$content-l: (1-(1-$gold)*(1-$gold))*100%;
+$content-s: (1-(1-$gold)*(1-$gold)-(1-$gold)*$gold)*100%;
+
+//动画
+@mixin animation ($name) {
+      -ms-animation-name:$name;
+     -moz-animation-name:$name;
+  -webkit-animation-name:$name;
+       -o-animation-name:$name;
+          animation-name:$name;
+      -ms-animation-duration:1s;
+     -moz-animation-duration:1s;
+  -webkit-animation-duration:1s;
+       -o-animation-duration:1s;
+          animation-duration:1s;
+      -ms-animation-timing-function:ease;
+     -moz-animation-timing-function:ease;
+  -webkit-animation-timing-function:ease;
+       -o-animation-timing-function:ease;
+          animation-timing-function:ease;
+      -ms-animation-fill-mode:forwards;
+     -moz-animation-fill-mode:forwards;
+  -webkit-animation-fill-mode:forwards;
+       -o-animation-fill-mode:forwards;
+          animation-fill-mode:forwards;
+}
+
+//边框不占大小
+@mixin border(){
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+}
+
+//滑动条   导航的
+@mixin slider () {
+  &::-webkit-scrollbar {
+    width: 0;
+  }/* 滚动条的滑轨宽度 */
+  &::-webkit-scrollbar-track {
+    background-color: #74B5EC;
+  } /* 滚动条的滑轨背景颜色 */
+  &::-webkit-scrollbar-thumb {
+    background-color: #2B2A39;
+  } /* 滑块颜色 */
+  &::-webkit-scrollbar-button {
+    background-color: #F2F2F2;
+  } /* 滑轨两头的监听按钮颜色 */
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  } /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+}
+//滑动条   内容的
+@mixin slider2 () {
+  &::-webkit-scrollbar {
+    width: 0;
+  }/* 滚动条的滑轨宽度 */
+  &::-webkit-scrollbar-track {
+    background-color: #EDEEF0;
+  } /* 滚动条的滑轨背景颜色 */
+  &::-webkit-scrollbar-thumb {
+    background-color: #A1C9ED;
+  } /* 滑块颜色 */
+  &::-webkit-scrollbar-button {
+    background-color: #F2F2F2;
+  } /* 滑轨两头的监听按钮颜色 */
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  } /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+}
+
