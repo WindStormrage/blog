@@ -1,6 +1,8 @@
 <template>
   <div class="nav">
-    <div class="head"></div>
+    <div class="head">
+      <img :src="url" alt="">
+    </div>
     <div class="name">谢晗阳</div>
     <div class="tab">
       <!--判断是否高亮，点击传当前的数据过去然后判断由谁高亮-->
@@ -39,12 +41,14 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'nav',
     data(){
     	return {
     		isTab: -1,
-        tab: -1
+        tab: -1,
+        url: ''
       }
     },
     methods: {
@@ -72,6 +76,16 @@
       }
     },
     created(){
+      var that = this;
+      axios.get('http://localhost:3000/test')
+        .then(function (res) {
+          console.log(res.data.url);
+          that.url = res.data.url;
+        })
+        .catch(function (err) {
+          console.log("err"+err);
+        })
+
     	//接收content发来的点击事件，如果使右边导航隐藏
       var that = this;
       this.$root.Bus.$on('disTab',()=>{
@@ -113,6 +127,7 @@
     overflow-y: scroll;
     @include slider2();
     .head{
+      position: relative;
       margin-top: 50%-$gold*100%/2;
       margin-left: 50%-$gold*100%/2;
       width:$gold*100%;
@@ -123,6 +138,13 @@
         content: '';
         display: block;
         margin-top: 100%; //margin 百分比相对父元素宽度计算
+      }
+      img{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
     }
     .name{
