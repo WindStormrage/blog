@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
     <div class="head">
-      <img :src="url" alt="">
+      <img :src="data.header">
     </div>
-    <div class="name">谢晗阳</div>
+    <div class="name">{{data.name}}</div>
     <div class="tab">
       <!--判断是否高亮，点击传当前的数据过去然后判断由谁高亮-->
       <div :class="isTab == 0 ? 'action' : ''" @click="NavRight(0)">
@@ -48,7 +48,7 @@
     	return {
     		isTab: -1,
         tab: -1,
-        url: ''
+        data: {}
       }
     },
     methods: {
@@ -79,8 +79,7 @@
       var that = this;
       axios.get('http://localhost:3000/test')
         .then(function (res) {
-          console.log(res.data.url);
-          that.url = res.data.url;
+          that.data = res.data;
         })
         .catch(function (err) {
           console.log("err"+err);
@@ -197,7 +196,7 @@
     .other{
       width: 100%;
       position: absolute;
-      bottom: 20px;
+      bottom: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -224,7 +223,7 @@
         }
       }
     }
-    @media screen and (max-height: 600px){
+    @media screen and (max-height: 400px){
       .other{
         display: none;
       }

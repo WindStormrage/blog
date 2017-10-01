@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="banner" style="">
-      <div class="title"><img src="~assets/img/title.png"></div>
-      <div class="introduce">欢迎来到我的博客</div>
+      <div class="title"><img :src="confData.logo"></div>
+      <div class="introduce">{{confData.msg}}</div>
     </div>
     <div class="content">
       <div class="recommend">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  var test = require('assets/img/banner.jpg');
+  import axios from 'axios'
   export default {
     name: 'home',
     data(){
@@ -47,9 +47,7 @@
           {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'},
           {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'}
         ],
-        img: {
-        	background: "url(" + test + ") 100% no-repeat "
-        }
+        confData: {}
       }
     },
     methods: {
@@ -59,15 +57,20 @@
       }
     },
     created(){
-
+      var that = this;
+      axios.get('http://localhost:3000/test')
+        .then(function (res) {
+          that.confData = res.data;
+        })
+        .catch(function (err) {
+          console.log("err"+err);
+        })
     }
   }
 </script>
 
 <style scoped lang="scss" rel="stylesheet/scss">
-
   @import "~assets/scss/index.scss";
-
   .home{
     .banner{
       width: 100%;
@@ -75,7 +78,7 @@
       background-repeat: no-repeat;
       background-size: 100%;
       .title{
-        padding-top: 10%;
+        padding-top: 4%;
         text-align: center;
         img{
           width: 50%;
