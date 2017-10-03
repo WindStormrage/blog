@@ -4,7 +4,7 @@
     <div class="title">{{catalog.title}}</div>
     <div v-for="(item, index) in catalog.content">
       <a @click="choose(index)" :href="'#/composition/'+catalog.nav+'/' + index">
-        <li>{{item.title}}{{index}}</li>
+        <li>{{item.title}}!</li>
       </a>
       <span class="time">{{item.time}}</span>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'nav',
     data () {
@@ -31,19 +32,22 @@
       }
     },
     created(){
-    	//接收左边导航的数据判断是否显示，-1为隐藏其他显示
       var that = this;
+
+    	//接收左边导航的数据判断是否显示，-1为隐藏其他显示
+      //var that = this;
       this.$root.Bus.$on('tab',(tab)=>{
         that.tab = tab;
-        console.log(tab);
+        console.log('tab: ' + tab);
         //当他出现的时候要进行渲染
         if(that.tab !== -1){
           //渲染catalog
+          that.catalog.title = tab == 1 ? '博主文章' : '精彩转载';
           that.catalog.nav = tab;
           console.log('渲染'+tab);
+          that.show(that);
         }
       });
-
     },
     methods:{
     	//选择到哪篇文章了后就使左边导航高亮
@@ -52,6 +56,16 @@
           this.$root.Bus.$emit('composition',1);
     		else
           this.$root.Bus.$emit('composition',2);
+      },
+      show(that){
+        axios.get('http://localhost:3000/article?id='+that.tab)
+          .then(function (res) {
+            that.catalog.content = res.data;
+            console.log(that.catalog.content)
+          })
+          .catch(function (err) {
+            console.log("err"+err);
+          })
       }
     },
     beforeDestroy(){

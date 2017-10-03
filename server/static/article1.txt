@@ -1,0 +1,15 @@
+﻿
+##hello, markdown!
+文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
+```javascript
+var converter = new showdown.Converter();
+var text= \'#hello, markdown!\';
+var html= converter.makeHtml(text);
+```
+![666](http://static.mukewang.com/img/58341b88000176ce06000338-240-180.jpg)
+```html
+<div class="text same">
+<h3>1月活动</h3>
+<p>快过年了，大家可以商量着去哪玩吧~</p>
+</div>
+```

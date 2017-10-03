@@ -1,17 +1,17 @@
 <template>
   <div class="composition">
-    <div class="title">文章题目</div>
+    <div class="title">{{data.title}}</div>
     <div class="msg">
-      <span>2017/8/27 16:09</span>
-      <span>谢晗阳</span>
+      <span>{{data.date}}</span>
+      <span>{{data.name}}</span>
     </div>
     <div class="html" v-html="html"></div>
-    <p class="ps">备注：{{nav}}</p>
+    <p class="ps">备注：{{data.ps}}</p>
   </div>
 </template>
 
 <script>
-
+  import axios from 'axios'
   var showdown= require('showdown');
   var converter= new showdown.Converter();
 
@@ -20,9 +20,7 @@
     data(){
     	return{
         html: '666',
-        nav: '',
-        id: '',
-        text: ''
+        data: {}
       }
     },
     watch:{
@@ -35,20 +33,29 @@
     },
     methods: {
     	ChangePath(){
-        this.nav=this.$route.params.nav;
-        this.id=this.$route.params.id;
-        this.text='#hello, markdown!\n##nav='+this.nav+',id='+this.id+'\n文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容\n```\nvar converter = new showdown.Converter();\nvar text= \'#hello, markdown!\';\nvar html= converter.makeHtml(text);\n```![666](http://static.mukewang.com/img/58341b88000176ce06000338-240-180.jpg)\n```\n<div class="text same">\n<h3>1月活动</h3>\n<p>快过年了，大家可以商量着去哪玩吧~</p>\n</div>\n```';
-        this.html= converter.makeHtml(this.text);
+        var that = this;
+        axios.get('http://localhost:3000/article?id=' + that.$route.params.nav)
+          .then(function (res) {
+            that.data = res.data[that.$route.params.id];
+            //console.log(that.data.text);
+            //that.data.text.replace(/\n/g, "99999");
+            console.log(that.data.text);
+            that.html= converter.makeHtml(that.data.text);
+            console.log(that.html);
+          })
+          .catch(function (err) {
+            console.log("err"+err);
+          });
       }
     }
   }
 </script>
 
+
+
+
 <style lang="scss" rel="stylesheet/scss">
-
-  @import "~assets/scss/index.scss";
-
-
+  //@import "~assets/scss/index.scss";
   .composition{
     width: calc(100% - 100px);
     padding: 20px 50px;
@@ -67,11 +74,13 @@
       }
     }
     .html{
+      font-size: 150%;
+      line-height: 180%;
       margin: 50px 0;
-      font-size: 1.2rem;
-      line-height: 1.8rem;
       pre{
         overflow: scroll;
+        background-color: #2B2A39;
+        color: #a1c9ed;
       }
       img{
         max-width: 100%;

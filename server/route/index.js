@@ -13,7 +13,7 @@ mysql.connect('SELECT * FROM conf',function (results) {
   data.msg = unicode.toWord(results[0].msg);
 });
 
-router.get('/', function (req, res) {
+router.get('/index', function (req, res) {
   //允许跨域
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');

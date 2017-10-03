@@ -77,7 +77,7 @@
     },
     created(){
       var that = this;
-      axios.get('http://localhost:3000/test')
+      axios.get('http://localhost:3000/index')
         .then(function (res) {
           that.data = res.data;
         })
