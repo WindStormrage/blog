@@ -50,7 +50,7 @@
     created(){
       var that = this;
       //上面的一些信息
-      axios.get('http://localhost:3000/index')
+      axios.get('http://www.xiedashuaige.cn:3000/index')
         .then(function (res) {
           that.confData = res.data;
         })
@@ -58,7 +58,7 @@
           console.log("err"+err);
         });
       //文章展示数据
-      axios.get('http://localhost:3000/article?id=3')
+      axios.get('http://www.xiedashuaige.cn:3000/article?id=3')
         .then(function (res) {
           that.recommend = res.data;
           console.log(that.recommend[0].typeId+'*****************')
@@ -119,10 +119,15 @@
           position: relative;
           .title{
             font-size: 1.5rem;
+            overflow : hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
           }
           .body{
             font-size: 1.2rem;
-            height: 45px;
+            height: 43px;
             overflow : hidden;
             text-overflow: ellipsis;
             display: -webkit-box;

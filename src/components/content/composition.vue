@@ -34,7 +34,7 @@
     methods: {
     	ChangePath(){
         var that = this;
-        axios.get('http://localhost:3000/article?id=' + that.$route.params.nav)
+        axios.get('http://www.xiedashuaige.cn:3000/article?id=' + that.$route.params.nav)
           .then(function (res) {
             that.data = res.data[that.$route.params.id];
             //console.log(that.data.text);

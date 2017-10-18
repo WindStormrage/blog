@@ -4,7 +4,7 @@
     <div class="title">{{catalog.title}}</div>
     <div v-for="(item, index) in catalog.content">
       <a @click="choose(index)" :href="'#/composition/'+catalog.nav+'/' + index">
-        <li>{{item.title}}!</li>
+        <li>{{item.title}}</li>
       </a>
       <span class="time">{{item.time}}</span>
     </div>
@@ -58,7 +58,7 @@
           this.$root.Bus.$emit('composition',2);
       },
       show(that){
-        axios.get('http://localhost:3000/article?id='+that.tab)
+        axios.get('http://www.xiedashuaige.cn:3000/article?id='+that.tab)
           .then(function (res) {
             that.catalog.content = res.data;
             console.log(that.catalog.content)

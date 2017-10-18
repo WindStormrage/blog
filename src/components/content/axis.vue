@@ -27,7 +27,7 @@
     },
     created: function () {
       var that = this;
-      axios.get('http://localhost:3000/axis')
+      axios.get('http://www.xiedashuaige.cn:3000/axis')
         .then(function (res) {
           that.line = res.data;
         })

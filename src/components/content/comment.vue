@@ -42,7 +42,7 @@
     },
     methods: {
       create: function (that) {
-        axios.get('http://localhost:3000/comment')
+        axios.get('http://www.xiedashuaige.cn:3000/comment')
           .then(function (res) {
             that.comment = res.data;
           })
@@ -55,7 +55,7 @@
         if(that.name == '' || that.content == ''){
           alert('昵称和内容都要填写完哟(＾Ｕ＾)ノ~ＹＯ');
         }else{
-          axios.post('http://localhost:3000/postComment', {
+          axios.post('http://www.xiedashuaige.cn:3000/postComment', {
             name: that.name,
             content: that.content
           })

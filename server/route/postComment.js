@@ -35,7 +35,9 @@ router.all('/postComment', function (req, res) {
     id     = Number(lastId)+1;
 
 
-    fs.writeFile('./static/comment'+id+'.txt', req.body.content);
+    fs.writeFile('./static/comment'+id+'.txt', req.body.content,function (err) {
+      console.log("err: " + err);
+    });
 
     var del     = 0;
     if(req.body.name == undefined) del = 1;
