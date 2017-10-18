@@ -4,10 +4,10 @@
     <div class="frame">
       <div class="name">
         <span>昵称</span>
-        <input type="text" />
+        <input v-model="name" maxlength="20" type="text" />
       </div>
-      <textarea></textarea>
-      <div class="button">发表</div>
+      <textarea v-model="content"></textarea>
+      <div class="button" @click="button">发表</div>
     </div>
     <hr class="separate">
     <div class="loop" v-for="item in comment">
@@ -24,18 +24,49 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'comment',
     data(){
     	return {
         comment: [
-          {name: '名字名字', time: '2017/8/28 1:27', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {name: '名字名字', time: '2017/8/28 1:27', content: '内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {name: '名字名字', time: '2017/8/28 1:27', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {name: '名字名字', time: '2017/8/28 1:27', content: '内容内容内容内容内容内容内容内容'},
-          {name: '名字名字', time: '2017/8/28 1:27', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {name: '名字名字', time: '2017/8/28 1:27', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'}
-          ]
+          {name: '名字名字', time: '2017/8/28 1:27', content: '内容'}
+          ],
+        name: '',
+        content: ''
+      }
+    },
+    created: function () {
+      var that = this;
+      that.create(that)
+    },
+    methods: {
+      create: function (that) {
+        axios.get('http://localhost:3000/comment')
+          .then(function (res) {
+            that.comment = res.data;
+          })
+          .catch(function (err) {
+            console.log("err"+err);
+          });
+      },
+      button: function () {
+        var that = this;
+        if(that.name == '' || that.content == ''){
+          alert('昵称和内容都要填写完哟(＾Ｕ＾)ノ~ＹＯ');
+        }else{
+          axios.post('http://localhost:3000/postComment', {
+            name: that.name,
+            content: that.content
+          })
+            .then(function (res) {
+              console.log(res);
+              that.create(that);
+            })
+            .catch(function (err) {
+              console.log("err"+err);
+            });
+        }
       }
     }
   }

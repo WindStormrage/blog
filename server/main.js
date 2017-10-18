@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //mysql-test
@@ -16,9 +17,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 //route
 var index = require('./route/index');
 var article = require('./route/article');
+var axis = require('./route/axis');
+var comment = require('./route/comment');
+var postComment = require('./route/postComment');
 
 app.use('/', index);
 app.use('/', article);
+app.use('/', axis);
+app.use('/', comment);
+app.use('/', postComment);
 
 //设置静态文件目录
 app.use(express.static('static'));

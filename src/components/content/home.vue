@@ -9,8 +9,8 @@
         <div class="tltle">精品展示</div>
         <div class="card" v-for="item in recommend">
           <div class="title">{{item.title}}</div>
-          <div class="body">{{item.content}}</div>
-          <a @click="more()" :href="'#/composition/1/'+item.id" class="more">查看更多</a>
+          <div class="body">{{item.text}}</div>
+          <a @click="more()" :href="'#/composition/'+item.type+'/'+item.typeId" class="more">查看更多</a>
         </div>
       </div>
       <div class="link">
@@ -33,18 +33,9 @@
     data(){
     	return {
         recommend: [
-          {title: '标题', id: 0,content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {title: '标题', id: 1,content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {title: '标题', id: 2,content: '内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {title: '标题', id: 3,content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'},
-          {title: '标题', id: 4,content: '内容内容内容内容内容内容内容内容内容内容内容内容内容'}
+          {title: '标题', id: 0,content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'}
         ],
         links: [
-          {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'},
-          {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'},
-          {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'},
-          {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'},
-          {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'},
           {name: '百度一下', site: 'www.baidu.com', url: 'http://www.baidu.com'}
         ],
         confData: {}
@@ -58,9 +49,19 @@
     },
     created(){
       var that = this;
+      //上面的一些信息
       axios.get('http://localhost:3000/index')
         .then(function (res) {
           that.confData = res.data;
+        })
+        .catch(function (err) {
+          console.log("err"+err);
+        });
+      //文章展示数据
+      axios.get('http://localhost:3000/article?id=3')
+        .then(function (res) {
+          that.recommend = res.data;
+          console.log(that.recommend[0].typeId+'*****************')
         })
         .catch(function (err) {
           console.log("err"+err);

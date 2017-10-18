@@ -15,18 +15,25 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'axis',
     data(){
     	return {
     		line:[
-          {title: '题目', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', time: '2017/8/27 16:58'},
-          {title: '题目', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', time: '2017/8/27 16:58'},
-          {title: '题目', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', time: '2017/8/27 16:58'},
-          {title: '题目', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', time: '2017/8/27 16:58'},
           {title: '题目', content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容', time: '2017/8/27 16:58'}
         ]
       }
+    },
+    created: function () {
+      var that = this;
+      axios.get('http://localhost:3000/axis')
+        .then(function (res) {
+          that.line = res.data;
+        })
+        .catch(function (err) {
+          console.log("err"+err);
+        });
     }
   }
 </script>
