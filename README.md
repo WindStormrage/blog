@@ -27,3 +27,5 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 https://github.com/WindStormrage/WindStormrage.github.io
 博客地址是
 WindStormrage.github.io
+
+然后后台的数据库导出成了sql文件在blog.sql里面，可以直接运行建立相应的表
